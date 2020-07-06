@@ -72,7 +72,10 @@ class HashTable:
         Implement this, and/or FNV-1.
         """
         # Your code here
-        
+        hashVal = 5381
+        for x in key:
+            hashVal=((hashVal<<5)+hash) + ord(x)
+        return hashVal & 0xFFFFFFFF
 
 
     def hash_index(self, key):
