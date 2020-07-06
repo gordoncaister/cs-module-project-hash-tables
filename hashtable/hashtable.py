@@ -22,6 +22,8 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
+        self.capacity = capacity
+        self.storage = [None] * capacity if capacity >= MIN_CAPACITY else [None] * MIN_CAPACITY
 
 
     def get_num_slots(self):
@@ -35,6 +37,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        return len(self.storage)
 
 
     def get_load_factor(self):
@@ -54,6 +57,12 @@ class HashTable:
         """
 
         # Your code here
+        FNVPRIME = 0x100000001b3
+        hashVal = 14695981039346656037
+        for x in key:
+            hashVal = hashVal*FNVPRIME
+            hashVal = hashVal ^ x
+        return hashVal
 
 
     def djb2(self, key):
@@ -63,6 +72,7 @@ class HashTable:
         Implement this, and/or FNV-1.
         """
         # Your code here
+        
 
 
     def hash_index(self, key):
