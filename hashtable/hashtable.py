@@ -22,6 +22,8 @@ class HashTable:
 
     def __init__(self, capacity):
         # Your code here
+        self.capacity = capacity
+        self.storage = [None] * capacity if capacity >= MIN_CAPACITY else [None] * MIN_CAPACITY
 
 
     def get_num_slots(self):
@@ -35,6 +37,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
+        return len(self.storage)
 
 
     def get_load_factor(self):
@@ -54,6 +57,13 @@ class HashTable:
         """
 
         # Your code here
+        FNVPRIME = 0x100000001b3
+        hashVal = 0xcbf29ce484222325
+        byte_array = str(key).encode("utf-8")
+        for x in byte_array:
+            hashVal = hashVal*FNVPRIME
+            hashVal = hashVal ^ x
+        return hashVal
 
 
     def djb2(self, key):
@@ -63,6 +73,11 @@ class HashTable:
         Implement this, and/or FNV-1.
         """
         # Your code here
+        hashVal = 5381
+        byte_array = str(key).encode("utf-8")
+        for x in byte_array:
+            hashVal=((hashVal * 33) ^ x) % 0x100000000
+        return hashVal
 
 
     def hash_index(self, key):
@@ -70,8 +85,8 @@ class HashTable:
         Take an arbitrary key and return a valid integer index
         between within the storage capacity of the hash table.
         """
-        #return self.fnv1(key) % self.capacity
-        return self.djb2(key) % self.capacity
+        return self.fnv1(key) % self.capacity
+        # return self.djb2(key) % self.capacity
 
     def put(self, key, value):
         """
@@ -82,7 +97,9 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        index = self.hash_index(key)
+        self.storage[index] = value
+        return self.storage
 
     def delete(self, key):
         """
@@ -93,7 +110,8 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        self.put(key,None)
+        return self.storage
 
     def get(self, key):
         """
@@ -104,7 +122,7 @@ class HashTable:
         Implement this.
         """
         # Your code here
-
+        return self.storage[self.hash_index(key)]
 
     def resize(self, new_capacity):
         """
