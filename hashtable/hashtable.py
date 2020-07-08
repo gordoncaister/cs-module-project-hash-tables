@@ -1,3 +1,5 @@
+from singly_linked import LinkedList
+
 class HashTableEntry:
     """
     Linked List hash table key/value pair
@@ -6,6 +8,12 @@ class HashTableEntry:
         self.key = key
         self.value = value
         self.next = None
+        def get_value(self):
+            return self.value
+        def get_next(self):
+            return self.next_node
+        def set_next(self, new_next):
+            self.next_node = new_next
 
 
 # Hash table can't have fewer than this many slots
@@ -63,6 +71,7 @@ class HashTable:
         for x in byte_array:
             hashVal = hashVal*FNVPRIME
             hashVal = hashVal ^ x
+            
         return hashVal
 
 
@@ -100,6 +109,14 @@ class HashTable:
         index = self.hash_index(key)
         self.storage[index] = value
         return self.storage
+
+        new_node = HashTableEntry(data)
+        if not self.head and not self.tail:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.set_next(new_node)
+            self.tail = new_node
 
     def delete(self, key):
         """
@@ -169,3 +186,4 @@ if __name__ == "__main__":
         print(ht.get(f"line_{i}"))
 
     print("")
+    print(ht.storage)
