@@ -11,6 +11,7 @@ def slowfun_too_slow(x, y):
     v %= 982451653
 
     return v
+    
 values = dict()
 for x in range (2,14):
     for y in range (3,6):
