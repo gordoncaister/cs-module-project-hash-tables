@@ -56,10 +56,9 @@ while iterator is less than 5:
 # Your code here
 p = 0
 while p < 5:
-    print("MAIN WHILE",p)
     key = random.choice(list(cache.keys()))
     if re.match(r'"?[A-Z]',key) != None:
-        if re.match(r'[.?!]"?',key) != None:
+        if re.match(r'[a-zA-Z]+[.?!]"?',key) != None:
             print(key, end="\n\n")
             p +=1
         else:
@@ -67,8 +66,7 @@ while p < 5:
             key = random.choice(list(cache[key]))
             stop = False
             while not stop:
-                if re.match(r'[.?!]"?',key) != None:
-                    print("stopped")
+                if re.match(r'[a-zA-Z]+[.?!]"?',key) != None:
                     print(key, end="\n\n")
                     p +=1
                     stop = True
@@ -76,8 +74,33 @@ while p < 5:
                     print(key, end=" ")
                     key = random.choice(list(cache[key]))
 
-        p +=1
+
 
 
         
+# while p < 5:
+#     print("MAIN WHILE\n\n\n\n",p)
+#     key = random.choice(list(cache.keys()))
+#     if re.match(r'"?[A-Z]',key) != None:
+#         print("First if: ", p)
+#         if re.match(r'[.?!]"?',key) != None:
+#             print("second if: ", p)
+#             p += 1
+#         else:
+#             print("First else:", p)
+#             key = random.choice(list(cache[key]))
+#             stop = False
+#             while not stop:
+#                 print("Got here:",key)
+#                 if re.match(r'[.?!]"?',key) != None:
+#                     print("Third if: ", p)
+#                     p += 1
+#                     stop = True
+#                 else:
+#                     key = random.choice(list(cache[key]))
+#                     print("First else:",p)
+#                     stop = False
+#             print("Do I ever Get here?")
+#             p += 1
 
+# print(re.match(r'[a-zA-Z]+[.?!]"?','bone."'))
