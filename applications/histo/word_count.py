@@ -8,7 +8,6 @@ def word_count(s):
     cache = dict()
 
     newStr = ''.join(char for char in s if char not in ignorethese)
-    print(newStr)
     # for char in ignorethese:
     #     print(char)
     #     newStr = newStr.replace(char,"")
